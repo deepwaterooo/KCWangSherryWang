@@ -3,6 +3,25 @@
 #+author: Deepwaterooo Wang
 #+options: ^:nil
 
+* 成长的故事 -- 我与舅舅
+- 2011年11月4日，当三大中文媒体对我的人肉已经伤及我自身生活，我必须站出来澄清自己, in Part 1, （San Jose, CA）；
+
+ [[./pic/dreamer1.png]]
+- 4/19/2012 - 6/17/2012, in Part 1, 第二次写至统计专业OPT实习结束（San Jose, CA）；
+
+ [[./pic/dreamer2.png]]
+- 2014年夏天，写于SJSU Library (San Jose State University Public Library, San Jose, CA)
+
+ [[./pic/dreamer30.png]]
+- 2/13/2015 - 12/17/2015(?, Moscow, ID; either and or not San Jose State University Public Library, San Jose, CA)
+
+ [[./pic/dreamer3.png]]
+
+- I will reorganize the four pdfs, and emphasize keys issues and situations of the whole process, while at the same time to help major population understand what's going on, and what's inside opinions. 虽然这个成长的故事系列是以2011年当三大中文网站（mitbbs.com, wenxuecity.com and backchina.com）中文媒体对我的人肉与网上评论伤及我的正常生活时，我站出来开始写自己的自传，并分四次在四个不同的时间段，不同舆论或事件压力下或是网上澄清，或是网上求助以便能帮我泄掉一部分当时自己的压力，分四次于不同的点纪录自己的主要生活，纪录到2015年计算机硕士学位结束。
+- 这一次，这里，我会以事件主要人物及其相关主要事迹的人物列传、或/和大事记、大冲突记的形式来重新组织语言，重述我的整个成长史与大事记、大冲突记，来帮助自己成长、并帮助社会大众认清事情所有环节真相的目的。但鉴于时间有限，我会以剧情梗概的形式每天大致纪录与一个相关人物某件或某几件事的进展、或一天一两个主要事件，并将已经完成了的四个部分作为原始事件纪录的细节参考供索引，并争取做到每日更新一篇，到我把先前与这个教授舅舅的所有冲突的这件事情具体讲述清楚，以供大家共同去探讨事情的真相到底如何，有一个更能为大家所接受或理解的底层社会小人物的心灵成长史。
+
+* 我与舅舅
+
 * 关键人物及相互关系
 ** KC Wang(王孔启) @WSU
 
@@ -555,7 +574,7 @@
  
   [[./pic/noIDsPaper.png]]
 - Please clearly aware that after this dangerous/concerning thread has spawn up for the silicon dark cycle force for the three websites (mitbbs.com, wenxuecity.com and backchina.com), as I have stated early, the three websites have being taking actions to prevent the spread of this issue, especially Youtube.com necessary videoes blocking to prevent ordinary audience to be able to access them, together with any other related to this topic on propose cause Youtube is under their force to control, and now they do want to take every effort to protect themselves as well as potential financial economical hurt they could potentially be affected, not sure if they blocked from my account only. Vaccine is the topic that they are willing to spread. And it could be possible that they are the back hiden controll force or benefited from these vaccines. They do have multiple fields cooperations我早前已经提到过youtube对哪些店家是主动帮他们推广的，哪些不是，现这个话题已经被他们为保护他们自己的利益而故意blocked。也就是说，当这个问题引起人们的注意，本该有不少讨论的时候油管视频等，但他们为保护他们这块媒体业能在他们更多的黑色产业链中发挥充分作用而现在必须保护的时候，他们采用了阻止油管中相关类视频的upload与推送（疫苗是他们喜欢推广的，因为他们应该是最大受益人，for what ever reasons correlated with them），他们正做的是把现在这个ID verification必要性这个话题的发酵毁灭在这第一天的萌芽时。因为youtube是属于三大势力范围内，外人只能感知他们对自己的保护的手段，却无力阻止他们对自己的保护。只有学术界等相关领域推动采取必要有效的政策法规管制或对这种媒体的国家层面宏观调控，
-- 另外我想强调的是2013年夏天在三星的实习11个周的时间我只做了几个小的项目，但几乎每个项目都有固定设置trap的上下文背景。 *My emphasze here is that the file https://github.com/deepwaterooo/MyAutobiography/blob/master/pic/part2_deepwaterooo-Autobiography.pdf part 2 暑假实习 part 2 pags 35 - 78 on the contents of summer intern during 2013. I have only a few projects, and we can see clearly every bug/mistake that I have made they have prepared and trapped the person that will be trapped to be sex slaves later. And potentially, this could be the highest rate career space sex slave site that I could ever be confused among all professional working spaces that I have ever worked during United States. After today's effects, they do deeply worry that this post could expose more of their silicon valley dark cycle manipulations. I will try my best to work on this part later, but it won't be as obvious as today's ID verification necessariness though, but more about detailed sex slave female project trapping/handling scandals producing/spreading by coworker on propose process in professional working space, which I had no sensitivity nor any cooperation with the team during paypal 3 months in Spring 2012.*
+- 另外我想强调的是2013年夏天在三星的实习11个周的时间我只做了几个小的项目，但几乎每个项目都有固定设置trap的上下文背景。 *My emphasze here is that the file https://github.com/deepwaterooo/MyAutobiography/blob/master/pic/part2_deepwaterooo-Autobiography.pdf part 2 暑假实习 part 2 pags 35 - 78 on the contents of summer intern during 2013. I have only a few projects, and we can see clearly every bug/mistake that I have made they have prepared and trapped the person that will be trapped to be sex slaves later. And potentially, this could be the highest rate career space sex slave site that I could ever be confused among all professional working spaces that I have ever worked during United States. After today's effects, they do deeply worry that this post could expose more of their silicon valley dark cycle manipulations. I will try my best to work on this part later, but it won't be as obvious as today's ID verification necessariness though, but more about detailed sex slave female project trapping/handling scandals producing/spreading by coworker on propose process in professional working space, which I had no cooperation nor sensitivity at all with the team during paypal 3 months in Spring 2012.*
 
 **** The personality cultivation of Eric Shing-suan Wang王心选的个性以及可能的形成原因
 - 前面有提到我注意到的舅舅的个性特征以及它们的形成原因，那么表哥呢？表哥是什么样的人,在我现在的眼里表- （*这里的细节再确认一下具体是什么的事*）有一个时间点，前后是形成鲜明的对比的
