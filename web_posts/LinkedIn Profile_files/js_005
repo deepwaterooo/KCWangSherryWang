@@ -1,0 +1,443 @@
+
+
+/* js/util/SaveUISetting.js */
+
+function SaveUISetting(b,a){var a={setting:{name:(a.setting&&a.setting.name)?a.setting.name:null,value:(a.setting&&a.setting.value)?a.setting.value:"false"},triggerID:a.triggerID||null,preventDefault:(a.preventDefault===false)?false:true,saveOnLoad:(a.saveOnLoad===true)?true:false,container:b};
+if(a.triggerID){YEvent.on(a.triggerID,"click",this.saveSetting,a)
+}if(a.saveOnLoad){if(typeof(oUISettings)!=="undefined"&&oUISettings.saveSettings){oUISettings.saveSettings(a.setting.name,a.setting.value)
+}}}SaveUISetting.prototype={saveSetting:function(a,c){if(typeof(oUISettings)!=="undefined"&&oUISettings.saveSettings){if(c.setting.name){oUISettings.saveSettings(c.setting.name,c.setting.value)
+}}if(c.preventDefault){YEvent.preventDefault(a)
+}var b=YDom.get(c.triggerID);
+if(!c.preventDefault&&b&&b.tagName.toLowerCase()=="a"){YEvent.preventDefault(a);
+window.setTimeout(function(){location.href=b.href
+},1)
+}var d=YDom.get(c.container);
+LI.fade(d)
+}};
+
+/* js/util/Dialog.js */
+
+(function(){var a="interrupt success-plus success-timeout task-modal task-modeless task-modeless-secondary no-header noheader-modal";
+var d={autoSize:"no-header task-modeless success-plus success-timeout",modal:"interrupt task-modal noheader-modal",dragNDrop:"task-modeless task-modeless-secondary success-plus success-timeout",docClick:"success-plus success-timeout",timeout:"success-timeout"};
+var e=null;
+var c={or:LI.i18n.get("Dialog-or"),closeThisWindow:LI.i18n.get("Dialog-closeWindow"),cancel:LI.i18n.get("Dialog-cancel"),submit:LI.i18n.get("Dialog-submit")};
+LI.Dialog=function(h,g){var f=e||new b();
+e=f;
+if(h){c=(g.i18n)?g.i18n:c;
+g=g||{};
+g.content=g.content||{};
+g={content:{attentionMsg:g.content.attentionMsg||null,successMsg:g.content.successMsg||null,title:g.content.title||null,node:g.content.node||null,url:g.content.url||null,useCache:g.content.useCache||false,html:g.content.html||null,submitButton:g.content.submitButton||false},dependencies:g.dependencies||null,name:g.name||"config.name=not_set",className:g.className||"",type:(g&&g.type&&a.match(g.type))?g.type:"task-modeless",width:(g&&g.width)?parseInt(g.width,10):500,extra:(g.extra)?g.extra:null,lazyEvent:(g.lazyEvent)?g.lazyEvent:null};
+YEvent.on(h,"click",e.open,g);
+if(g.lazyEvent){e.open(g.lazyEvent,g)
+}}return e
+};
+function b(){var F;
+var s;
+var x=null,m=null,A=null;
+var u=parseInt(YDom.getStyle("body","padding-right"),10);
+var r=document.createElement("DIV");
+YEvent.on(r,"click",i);
+var o=new YAHOO.util.KeyListener(document,{keys:27},{fn:C});
+var B=document.createElement("DIV");
+B.id="dialog-place-holder";
+var l=new YAHOO.util.CustomEvent("close");
+var n=new YAHOO.util.CustomEvent("open");
+var h=new YAHOO.util.CustomEvent("beforeOpen");
+var t=new YAHOO.util.CustomEvent("submit");
+var k=new YAHOO.util.CustomEvent("swap");
+var v=new YAHOO.util.CustomEvent("contentChange");
+var f=null;
+var y={};
+function z(I){F=I;
+var K,J,H="&nbsp";
+if(F.content){if(F.content.title){K=F.content.title
+}else{if(F.content.node){J=Y$(".dialog-title",F.content.node,true);
+if(J){K=J.innerHTML;
+YDom.setStyle(J,"display","none")
+}}}}if(!K){K=H
+}r.innerHTML=YAHOO.lang.substitute(['<div class="dialog-window">','<div class="dialog-title"><button class="dialog-close" title="{closeWindow}"></button><h3 class="title">{title}</h3></div>','<div class="dialog-body"></div>',"</div>"].join(""),{title:K,closeWindow:c.closeThisWindow})
+}function i(H){var I=YEvent.getTarget(H);
+if(YDom.hasClass(I,"dialog-close")){var J=C(H);
+if(J){YEvent.preventDefault(H);
+l.fire(I,A.name,A.extra)
+}}else{if(YDom.hasClass(I,"dialog-submit")||(I.tagName=="INPUT"&&I.type&&I.type=="submit")){t.fire(I,A.name,A.extra)
+}else{if(I.href){}}}}function C(H){var J=(H&&H.type=="click"||(H=="keyPressed"||H=="timer"||H=="selfClose"));
+if(J){D();
+var I=YDom.get("dialog-wrapper");
+if(!I){return
+}var K=Y$(".dialog-content",I,true);
+if(K){Y$(".dialog-content",I,true).innerHTML=""
+}YEvent.removeListener(window,"resize",j);
+document.body.removeChild(I);
+YDom.removeClass(document.body,"dialog-mask-active");
+YDom.removeClass(document.body,"dialog-hide-select");
+o.disable();
+YDom.setStyle("body","padding-right",u+"px");
+YDom.setStyle([YDom.get("header"),YDom.get("footer")],"margin-right","auto");
+YDom.setStyle(document.getElementsByTagName("HTML")[0],"overflow","");
+if(m){YEvent.removeListener(document,"click",C);
+m=null
+}if(x){clearTimeout(x);
+x=null
+}}return J
+}function G(I){var H="";
+var K='<p class="dialog-close">{closeWindow}</p>';
+var J='<input class="btn-primary" type="submit" value="{submit}"> {cancel}';
+return YAHOO.lang.substitute(['<div class="dialog-message">{message}</div>','<div class="dialog-content">{content}</div>','<div class="dialog-actions">',(I&&I.content&&I.content.submitButton)?J:"",(I&&I.content&&I.content.closeMessage)?K:"","</div>"].join(""),{cancel:c.or+' <span class="dialog-cancel dialog-close">'+c.cancel+"</span>",closeWindow:'<span class="dialog-cancel dialog-close">'+c.closeThisWindow+"</span>",message:(I&&I.content&&I.content.msg)?"<p>"+I.content.msg+"</p>":"",submit:(I&&I.content&&I.content.submitButton!==true)?I.content.submitButton:c.submit})
+}function w(){YEvent.on(Y$(".dialog-title",r,true),"mousedown",function(Q){if(!YDom.hasClass(YEvent.getTarget(Q),"dialog-close")){K(Q)
+}});
+var O={};
+var N={};
+var H=0,L=0;
+var M=YDom.get("dialog-wrapper");
+function K(Q){var R=parseInt(YDom.getStyle(M,"width"),10)||0;
+var S=parseInt(YDom.getStyle(M,"height"),10)||0;
+YDom.addClass(document.body,"dragging");
+O={x:Q.clientX,y:Q.clientY};
+N.left=N.left||parseInt(YDom.getStyle(M,"left"),10)||0;
+N.top=N.top||parseInt(YDom.getStyle(M,"top"),10)||0;
+H=YDom.getDocumentWidth()-R;
+L=YDom.getDocumentHeight()-S;
+YEvent.on(document,"mouseup",J);
+YEvent.on(document,"mousemove",P);
+I(true);
+YEvent.stopEvent(Q)
+}function P(Q){N.left+=Q.clientX-O.x;
+N.top+=Q.clientY-O.y;
+N.left=Math.min(Math.max(N.left,0),H);
+N.top=Math.min(Math.max(N.top,0),L);
+YDom.setStyle(M,"left",N.left+"px");
+YDom.setStyle(M,"top",N.top+"px");
+O={x:Q.clientX,y:Q.clientY}
+}function J(){YDom.removeClass(document.body,"dragging");
+YEvent.removeListener(document,"mouseup",J);
+YEvent.removeListener(document,"mousemove",P);
+I(false)
+}function I(Q){if(Q){document.body.ondrag=document.body.onselectstart=function(){return false
+};
+document.body.style.MozUserSelect="none"
+}else{document.body.ondrag=document.body.onselectstart=null;
+document.body.style.MozUserSelect=""
+}}}function q(I){YAHOO.util.Connect.initHeader("X-IsDialog","1");
+YAHOO.util.Connect.asyncRequest("GET",I,{success:function(J){var K=Y$(".dialog-body",r,true);
+YDom.removeClass(K,"dialog-body-loading");
+if(!J){H()
+}else{if(J&&J.responseText){var L=YAHOO.lang.trim(J.responseText);
+if(L.indexOf("<!DOCTYPE")===0||L.indexOf("<html")===0){H()
+}else{p({content:{html:L}})
+}}}},failure:function(){H()
+},timeout:15000});
+function H(){LI.Dialog().close();
+LI.injectAlert(LI.i18n.get("Dialog-error-generic"),"error")
+}}function j(H){if(d.modal.match(F.type)){if(YAHOO.env.ua.ie<7){var L=YDom.getClientRegion();
+YDom.setStyle(r,"height",(L.bottom-L.top)+"px")
+}}else{var J=Y$(".dialog-window",r,true),K=YDom.get("dialog-wrapper"),I=parseInt(YDom.getStyle(J,"width"),10);
+YDom.setStyle(K,"left",(YDom.getViewportWidth()-I+30)/2+"px");
+YDom.setStyle(K,"top",YDom.getDocumentScrollTop()+105+"px")
+}}function E(U,K){var M=(U==null)?"publicAPI":YEvent.getTarget(U);
+if(YDom.inDocument("dialog-wrapper")&&(M!=s||M=="publicAPI")){C("selfClose")
+}A=K;
+var Q=null;
+if(typeof K.i18n=="object"){Q={};
+YAHOO.lang.augmentObject(Q,c);
+YAHOO.lang.augmentObject(c,K.i18n,true)
+}r.className="dialog-mask dialog-"+K.type;
+if(M!=s||M=="publicAPI"){z(K);
+s=M
+}p(K);
+var O=Y$(".dialog-window",r,true);
+YDom.setStyle(O,"width",K.width+"px");
+YDom.setStyle(r,"visibility","hidden");
+var H=YDom.get("dialog-wrapper")||document.body.appendChild(document.createElement("DIV"));
+H.id="dialog-wrapper";
+H.innerHTML="";
+if(K.className!=""){H.className=K.className
+}YDom.setStyle(H,"top","");
+YDom.setStyle(H,"left","");
+H.appendChild(r);
+var I=YDom.getStyle(r,"filter")||null;
+if(d.modal.match(K.type)){var T=YAHOO.util.Region.getRegion(O);
+YDom.setStyle(O,"margin-left",(K.width*-0.5)+"px");
+var P=YAHOO.util.Region.getRegion(H);
+YDom.setStyle(document.getElementsByTagName("HTML")[0],"overflow","hidden");
+var L=YAHOO.util.Region.getRegion(H).right-P.right;
+var V=L+u;
+YDom.addClass(document.body,"dialog-mask-active");
+if(YAHOO.env.ua.ie&&YAHOO.env.ua.ie<7){var N=YDom.getClientRegion();
+YDom.setStyle(r,"height",(N.bottom-N.top)+"px")
+}}else{var T=YAHOO.util.Region.getRegion(r);
+var S=parseInt(YDom.getStyle(O,"width"),10);
+YDom.setStyle(H,"left",(YDom.getViewportWidth()-S+30)/2+"px");
+YDom.setStyle(H,"top",YDom.getDocumentScrollTop()+105+"px");
+if(d.autoSize.match(K.type)){YDom.addClass(H,"auto-size")
+}else{YDom.removeClass(H,"auto-size")
+}if(d.dragNDrop.match(K.type)){w()
+}if(YAHOO.env.ua.ie&&YAHOO.env.ua.ie<7){if(f===null||!f.parentNode){f=document.createElement("IFRAME");
+f.src="javascript:false;";
+YDom.setStyle(f,"width",K.width+"px");
+YDom.setStyle(f,"height","0px");
+YDom.insertBefore(f,YDom.getFirstChild(r))
+}function R(){var X=YAHOO.util.Region.getRegion(O);
+var W=X.bottom-X.top;
+YDom.setStyle(f,"height",W+"px");
+YDom.setStyle(O,"margin-top",-W+"px");
+YDom.setStyle(r,"height","")
+}k.subscribe(R);
+var J=window.setInterval(R,500);
+l.subscribe(function(){k.unsubscribe(R);
+window.clearInterval(J);
+l.unsubscribe(arguments.callee)
+})
+}}YEvent.on(window,"resize",j);
+h.fire(M,K.name,K.extra);
+if(YDom.getLastChild(document.body)!=H){document.body.appendChild(document.body.removeChild(H))
+}YDom.setStyle(r,"visibility","");
+o.enable();
+if(d.timeout.match(K.type)){x=setTimeout(function(){C("timer")
+},2000)
+}if(d.docClick.match(K.type)){YEvent.on(document,"click",C);
+m=true
+}if((YAHOO.env.ua.ie==6)&&(K.type=="task-modal"||K.type=="interrupt")){document.location.href="#header"
+}if(U!=null){YEvent.stopEvent(U)
+}n.fire(M,K.name,K.extra);
+if(Q){c=Q
+}}function D(){var H=YDom.getFirstChild(Y$(".dialog-content",r,true));
+if(!H){return
+}if(YDom.inDocument(B)){B.parentNode.replaceChild(H,B)
+}else{if(A.content&&A.content.url){y[A.content.url]=H.parentNode.removeChild(H)
+}}}function p(I){var O=(I&&I.content)?I.content:{};
+var H=Y$(".dialog-body",r,true);
+if(I.dependencies){g(I)
+}else{if(O.url&&(!O.useCache||!y[O.url])){var J=Y$(".dialog-content",r,true);
+if(J){J.innerHTML=""
+}YDom.addClass(H,"dialog-body-loading");
+q(O.url)
+}else{if(O.attentionMsg||O.successMsg||O.node||O.html||(O.useCache&&O.url&&y[O.url])){function M(T){var V=Y$(".dialog-message",T,true);
+var U=Y$(".dialog-content",T,true);
+var R=YDom.getNextSibling(U);
+YDom.setStyle([V,U,R],"display","none");
+if(O.attentionMsg||O.successMsg){U.innerHTML="";
+V.innerHTML="<p>"+(O.attentionMsg||O.successMsg)+"</p>";
+YDom.addClass(V,(O.successMsg)?"alert success":"alert attention");
+YDom.setStyle(V,"display","")
+}if(O.node){var S=YDom.get(O.node);
+S.parentNode.replaceChild(B,S);
+U.innerHTML="";
+U.appendChild(S);
+YDom.setStyle(U,"display","")
+}else{if(O.html){U.innerHTML=O.html;
+YDom.setStyle(U,"display","")
+}else{if(O.useCache&&O.url&&y[O.url]){U.innerHTML="";
+U.appendChild(y[O.url]);
+YDom.setStyle(U,"display","")
+}}}if(I.content&&(I.content.submitButton||I.content.closeMessage)){YDom.setStyle(R,"display","")
+}LI.Controls.parseFragment(H);
+v.fire(A.name,A.extra)
+}var Q=G(I);
+var L=YDom.inDocument("dialog-wrapper");
+var K=H.cloneNode(true);
+var N=H.parentNode;
+var P=YDom.getStyle(H,"height");
+YDom.setStyle(H,"height",P);
+D();
+YDom.setStyle(H,"height","");
+H.innerHTML=Q;
+M(H)
+}}}}function g(L){var N=L.dependencies;
+if(typeof N==="string"){N=LI.Controls.resolveName(N)
+}if(!N){return
+}var H=(N.jsFiles==undefined),M=(N.cssFiles==undefined);
+var K=Y$(".dialog-body",r,true);
+YDom.addClass(K,"dialog-body-loading");
+var J=function(){if(H&&M){YDom.removeClass(K,"dialog-body-loading");
+delete L.dependencies;
+p(L)
+}};
+var I=function(){var O=['<div class="dialog-container interrupt">','<div class="alert attention"><p><strong>'+LI.i18n.get("Dialog-error-generic")+"</strong></p></div>","</div>"].join(" ");
+p({name:L.name,content:{html:O,closeMessage:true}})
+};
+if(!H||!M){if(!H){YAHOO.util.Get.script(N.jsFiles,{onSuccess:function(){H=true;
+J()
+},onFailure:function(){I()
+},timeout:1000})
+}if(!M){YAHOO.util.Get.css(N.cssFiles,{onSuccess:function(){M=true;
+J()
+},onFailure:function(){I()
+},timeout:1000})
+}}else{J()
+}}return{contentChangeEvent:v,close:function(){C("selfClose")
+},closeEvent:l,open:function(){if(arguments.length===1){evt=null;
+F=arguments[0]
+}else{evt=arguments[0];
+F=arguments[1]
+}E(evt,F)
+},openEvent:n,beforeOpenEvent:h,submitEvent:t,swapEvent:k,swap:function(I){var H=(A&&A.name)?A.name:"";
+p(I);
+if(A){k.fire("",H,A.extra)
+}}}
+}})();
+YAHOO.register("LI.Dialog",LI.Dialog,{});
+
+/* js/util/FrontierAJAXForm.js */
+
+LI.define("FrontierAJAXForm");
+LI.FrontierAJAXForm=function(c,e){e=e||{};
+e.backgroundColor=e.backgoundColor||"#fff";
+e.injectAfter=e.injectAfter||".actions .btn-primary";
+e.enableAJAX=(e.enableAJAX!==false)?true:false;
+e.enableDemo=e.enableDemo||false;
+e.errorId=e.errorId||YDom.generateId();
+e.useGlobalError=e.useGlobalError||false;
+e.injectGlobalError=(e.injectGlobalError!=="undefined"&&e.injectGlobalError===false)?false:true;
+e.injectGlobalErrorOnly=e.injectGlobalErrorOnly||false;
+e.successCallback=e.successCallback||null;
+e.exceptionCallback=e.exceptionCallback||null;
+e.errorCallback=e.errorCallback||null;
+e.failureCallback=e.failureCallback||null;
+if(e.useGlobalError){e.errorId="global-error"
+}var b=this;
+var j=YDom.getRegion(c);
+var l=16;
+b.successHandlers=[];
+b.failureHandlers=[];
+var f=Y$(e.injectAfter,c,true);
+var k=f;
+while(k.nextSibling){if(k.nextSibling.nodeType===1){YDom.addClass(k.nextSibling,"hidden")
+}k=k.nextSibling
+}var o=document.createElement("div");
+YDom.addClass(o,"screen");
+c.appendChild(o);
+var g=document.createElement("div");
+var n=YDom.getRegion(f).height;
+n=(n>l)?n:l;
+if(f.nextSibling){f.parentNode.insertBefore(g,f.nextSibling)
+}else{f.parentNode.appendChild(g)
+}YDom.addClass(g,"progress-indicator");
+YDom.setStyle(g,"lineHeight",n+"px");
+var a=function(r){var q=YDom.get(e.errorId);
+if(!q){q=document.createElement("div");
+q.id=e.errorId;
+c.parentNode.insertBefore(q,c)
+}LI.injectAlert(r,"error",q);
+q.scrollIntoView()
+};
+var m=function(){YDom.removeClass(c,"form-submit-processing");
+YDom.removeClass(f,"disabled");
+YDom.setStyle(o,"display","none")
+};
+var d=function(){var q=YDom.getRegion(c);
+YDom.setStyle(o,"width",j.width+"px");
+YDom.setStyle(o,"height",q.height+"px");
+YDom.setStyle(o,"margin-top",(q.height*-1)+"px")
+};
+var i=function(q){location.href=q
+};
+var p=function(t){if(YDom.hasClass(c,"form-submit-processing")){return
+}YDom.addClass(c,"form-submit-processing");
+YDom.addClass(f,"disabled");
+var s=YDom.getRegion(c);
+YDom.setStyle(o,"backgroundColor",e.backgroundColor);
+YDom.setStyle(o,"display","block");
+d();
+var q=document.createElement("input");
+YDom.setStyle(q,"opacity",0);
+YDom.setStyle(q,"height","1px");
+YDom.setStyle(q,"width","1px");
+YDom.setStyle(q,"display","inline");
+c.appendChild(q);
+q.focus();
+c.removeChild(q);
+delete (q);
+if(e.enableDemo){YEvent.stopEvent(t);
+var r=(e.enableDemo=="success")?LI.FrontierAJAXForm.DEMO_SUCCESS:LI.FrontierAJAXForm.DEMO_FAILURE;
+b.handleFormSuccess=i;
+b.injectGlobalFormError=a;
+b.markFormErrors=markFormErrors;
+b.resetFormSubmission=m;
+window.setTimeout(function(){r.call(b)
+},5000);
+return false
+}if(e.enableAJAX){YEvent.preventDefault(t);
+window.setTimeout(function(){h()
+},1);
+return false
+}};
+var h=function(){YAHOO.util.Connect.setForm(c);
+LI.asyncRequest("POST",c.action,{custom:{error:function(q){LI.removeAlert();
+if(e.injectGlobalError||e.injectGlobalErrorOnly){if(q.globalError){a(q.globalError)
+}else{if(!e.injectGlobalErrorOnly){a(LI.i18n.get("oneOrMoreErrors"))
+}}}if(e.errorCallback){e.errorCallback(q)
+}m();
+d()
+},exception:function(){if(e.exceptionCallback){e.exceptionCallback()
+}}},success:function(t){for(var r=0,q=b.successHandlers.length;
+r<q;
+r++){var s=b.successHandlers[r];
+s.fn.apply(null,[t])
+}},failure:function(t){for(var r=0,q=b.failureHandlers.length;
+r<q;
+r++){var s=b.failureHandlers[r];
+s.fn.call(s.scope,t)
+}},timeout:25000})
+};
+this.addSuccessHandler=function(r,q){b.successHandlers.push({fn:r||function(){},scope:q||window})
+};
+this.addFailureHandler=function(r,q){b.failureHandlers.push({fn:r||function(){},scope:q||window})
+};
+if(e.successCallback){e.successCallback=(typeof(e.successCallback)=="string")?LI.Controls.resolveName(e.successCallback):e.successCallback;
+if(!e.successCallback){throw new Error(e.successCallback+" is not defined")
+}this.addSuccessHandler(e.successCallback)
+}if(e.failureCallback){this.addFailureHandler(e.failureCallback)
+}this.resetFormSubmit=m;
+YEvent.on(c,"submit",p)
+};
+
+/* js/apps/Feedback.js */
+
+LI.Feedback=function(e,c){function d(){LI.Dialog().closeEvent.unsubscribe(d)
+}function a(){LI.hide("feedback-form");
+LI.show("feedback-success");
+LI.Dialog().closeEvent.subscribe(d)
+}LI.Dialog().contentChangeEvent.subscribe(function(g,i){var f=i[1];
+if(i[0]!="feedback-dialog"){return
+}if(f&&f.feedbackSubjectLine){var h=YDom.get("subject-feedbackInfoForm");
+h.value=YAHOO.lang.trim(f.feedbackSubjectLine)
+}});
+var b=LI.Controls.getControl("feedback_info","FrontierAJAXForm");
+if(b){b.addSuccessHandler(function(){a()
+})
+}};
+
+/* js/language_switch.js */
+
+var langSwitch=function(){var c;
+function b(){var j;
+var g=YDom.get("nav-utility-lang");
+var h=g.getElementsByTagName("a");
+YEvent.on(g,"click",function(){var i=this;
+if(YDom.hasClass(i,"hover")){return
+}j=setTimeout(function(){YDom.addClass(i,"hover")
+},0)
+});
+YEvent.on(g,"mouseout",function(k){var l=this;
+var i=YEvent.getRelatedTarget(k);
+if(l!=i&&!YDom.isAncestor(l,i)){YDom.removeClass(l,"hover")
+}clearTimeout(j)
+});
+h[0].onclick=function(){return false
+};
+var d=YDom.get("lang-list");
+var f=d.getElementsByTagName("a");
+for(var e=0;
+f.length>e;
+e++){f[e].onclick=function(){a(this.lang);
+return false
+}
+}}function a(d){c.i18nLang.value=d;
+c.submit()
+}return{init:function(){if(!document.languageSelectorForm){return false
+}c=document.languageSelectorForm;
+b()
+}}
+}();
+YEvent.on(window,"load",langSwitch.init);
